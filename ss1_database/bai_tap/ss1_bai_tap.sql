@@ -1,5 +1,5 @@
-create database ss1;
-use ss1;
+create database management;
+use management;
 create table class(
 id int primary key,
 `name` varchar(45)
