@@ -1,30 +1,31 @@
 create database ss3_quan_ly_ban_hang;
 use ss3_quan_ly_ban_hang;
 
-create table customer(
-c_id int auto_increment primary key,
-c_name varchar(45),
-c_age tinyint
+CREATE TABLE customer (
+    c_id INT AUTO_INCREMENT PRIMARY KEY,
+    c_name VARCHAR(45),
+    c_age TINYINT
 );
 insert into customer(c_name,c_age)
 value ("Minh Quan",10),
 ("Ngoc Oanh",20),
 ("Hong Ha",50);
-create table orderr(
-o_id int auto_increment primary key,
-c_id int,
-o_date date,
-o_total_price int,
-foreign key(c_id) references customer(c_id)
+CREATE TABLE orderr (
+    o_id INT AUTO_INCREMENT PRIMARY KEY,
+    c_id INT,
+    o_date DATE,
+    o_total_price INT,
+    FOREIGN KEY (c_id)
+        REFERENCES customer (c_id)
 );
 	insert into orderr(c_id,o_date,o_total_price)
 	value(1,"2006-03-21", null),
 	(2,"2006-03-23",null),
 	(1,"2006-03-16",null);
-create table product(
-p_id int auto_increment primary key,
-p_name varchar(25),
-p_price int
+CREATE TABLE product (
+    p_id INT AUTO_INCREMENT PRIMARY KEY,
+    p_name VARCHAR(25),
+    p_price INT
 );
 insert into product(p_name,p_price)
 value ( "May Giat", 3),
@@ -32,13 +33,15 @@ value ( "May Giat", 3),
  ( "Dieu Hoa", 7),
  ( "Quat", 1),
  ( "Bep Dien", 2);
-create table order_dentail(
-o_id int,
-p_id int,
-primary key(o_id, p_id),
-od_qty int,
-foreign key(o_id) references orderr(o_id),
-foreign key(p_id) references product(p_id)
+CREATE TABLE order_dentail (
+    o_id INT,
+    p_id INT,
+    PRIMARY KEY (o_id , p_id),
+    od_qty INT,
+    FOREIGN KEY (o_id)
+        REFERENCES orderr (o_id),
+    FOREIGN KEY (p_id)
+        REFERENCES product (p_id)
 );
 insert into order_dentail(o_id,p_id,od_qty)
 value (1,1,3),
@@ -49,9 +52,10 @@ value (1,1,3),
  (2,5,4),
  (2,3,3);
 -- Hiển thị các thông tin  gồm oID, oDate, oPrice của tất cả các hóa đơn trong bảng Order
-select o_id,o_date,o_total_price
-from orderr;
--- Hiển thị danh sách các khách hàng đã mua hàng, và danh sách sản phẩm được mua bởi các khách
+SELECT 
+    o_id, o_date, o_total_price
+FROM
+    orderrách các khách hàng đã mua hàng, và danh sách sản phẩm được mua bởi các khách
 select c_name,p_name
 from customer
 join orderr 
