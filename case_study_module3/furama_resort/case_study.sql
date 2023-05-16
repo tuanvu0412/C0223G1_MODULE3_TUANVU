@@ -46,6 +46,8 @@ insert into nhan_vien(ho_ten,ngay_sinh,so_cmnd,luong,so_dien_thoai,email,dia_chi
  ("Tòng Hoang",'1989-09-03',"234414123",9000000,"0642123111","tonghoang@gmail.com","111 Hùng Vương, Hà Nội",2,4,4),
  ("Nguyễn Khúc An Nghi",'1982-09-03',"256781231",6000000,"0245144444","nguyennghi@gmail.com","213 Hàm Nghi, Đà Nẵng",2,4,4),
  ("Nguyễn Công Đạo",'1994-01-08',"755434343",8000000,"0988767111","nguyencongdao@gmail.com","6 Hoà Khánh, Đồng Nai",2,3,2);
+ 
+
 create table loai_khach(
 ma_loai_khach int auto_increment primary key,
 ten_loai_khach varchar(45)
@@ -149,18 +151,18 @@ foreign key(ma_khach_hang) references khach_hang(ma_khach_hang),
 foreign key(ma_dich_vu) references dich_vu(ma_dich_vu)
 );
 insert into hop_dong(ngay_lam_hop_dong,ngay_ket_thuc,tien_dat_coc,ma_nhan_vien,ma_khach_hang,ma_dich_vu)
-value(2020-12-08,2020-12-08,0,3,1,3),
-(2020-07-14,2020-07-21,	200000,7,3,	1),
-(2021-03-15,2021-03-17,	50000,3,4,2),
-(2021-01-14,2021-01-18,100000,7,5,5),
-(2021-07-14,2021-07-15,0,7,2,6),
-(2021-06-01,2021-06-03,0,7,7,6),
-(2021-09-02,2021-09-05,100000,7,4,4),
-(2021-06-17,2021-06-18,150000,3,4,1),
-(2020-11-19,2020-11-19,0,3,4,3),
-(2021-04-12,2021-04-14,0,10,3,5),
-(2021-04-25,2021-04-25,0,2,2,1),
-(2021-05-25,2021-05-27,0,7,10,1);
+value(20201208,20201208,0,3,1,3),
+(20200714,20200721,	200000,7,3,	1),
+(20210315,20210317,	50000,3,4,2),
+(20210114,20210118,100000,7,5,5),
+(20210714,20210715,0,7,2,6),
+(20210601,20210603,0,7,7,6),
+(20210902,20210905,100000,7,4,4),
+(20210617,20210618,150000,3,4,1),
+(20201119,20201119,0,3,4,3),
+(20210412,20210414,0,10,3,5),
+(20210425,20210425,0,2,2,1),
+(20210525,20210527,0,7,10,1);
 create table hop_dong_chi_tiet(
 ma_hop_dong_chi_tiet int auto_increment primary key,
 so_luong int not null,
@@ -170,11 +172,41 @@ foreign key(ma_hop_dong) references hop_dong(ma_hop_dong),
 foreign key(ma_dich_vu_di_kem) references dich_vu_di_kem(ma_dich_vu_di_kem)
 );
 insert into hop_dong_chi_tiet(so_luong,ma_hop_dong,ma_dich_vu_di_kem)
-value(1,5,2,4),	
-	(2,8,2,5),	
-	(3,15,2,6),
-	(4,1,3,1),
-	(5,11,3,2),
-	(6,1,1,3),
-	(7,2,1,2),	
-	(8,2,12,2);	
+value(5,2,4),	
+	(8,2,5),	
+	(15,2,6),
+	(1,3,1),
+	(11,3,2),
+	(1,1,3),
+	(2,1,2),	
+	(2,12,2);	
+-- 2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự.
+select *
+ from nhan_vien
+ where ho_ten like "%H" or ho_ten like "%T" or ho_ten like "%K" and char_length(ho_ten)<=15;
+-- 3.	Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”.
+ select  ngay_sinh, dia_chi
+ from khach_hang
+ where timestampdiff(year,khach_hang.ngay_sinh,curdate())>=18 
+ and  timestampdiff(year,khach_hang.ngay_sinh,curdate())<=50
+ and (dia_chi like "%Đà Nẵng" or dia_chi like "%Quảng Trị");
+-- 4.	Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng. Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.
+	select *
+    from khach_hang 
+    join loai_khach
+    on khach_hang.ma_loai_khach=loai_khach.ma_loai_khach
+    join hop_dong
+    on khach_hang.ma_khach_hang=hop_dong.ma_khach_hang
+    where ten_loai_khach="Diamond"
+	order by khach_hang.ho_ten;
+-- 5.	Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tong_tien (Với tổng tiền được tính theo công thức như sau: Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) cho tất cả các khách hàng đã từng đặt phòng. (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
+select kh.ma_khach_hang,kh.ho_ten,lk.ten_loai_khach,hop_dong.ma_hop_dong,dich_vu.ten_dich_vu,hop_dong.ngay_lam_hop_dong,hop_dong.ngay_ket_thuc, sum( dich_vu.chi_phi_thue+hop_dong_chi_tiet.so_luong*gia) as total
+from loai_khach as lk
+join khach_hang as kh on kh.ma_loai_khach=lk.ma_loai_khach
+join hop_dong on kh.ma_khach_hang=hop_dong.ma_khach_hang
+join dich_vu on hop_dong.ma_dich_vu=dich_vu.ma_dich_vu
+join kieu_thue on dich_vu.ma_kieu_thue=kieu_thue.ma_kieu_thue
+join loai_dich_vu on dich_vu.ma_loai_dich_vu=loai_dich_vu.ma_loai_dich_vu
+join hop_dong_chi_tiet on hop_dong.ma_hop_dong=hop_dong_chi_tiet.ma_hop_dong
+join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem=dich_vu_di_kem.ma_dich_vu_di_kem
+group by hop_dong.ma_hop_dong
