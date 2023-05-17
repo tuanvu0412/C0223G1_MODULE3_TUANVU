@@ -200,13 +200,11 @@ select *
     where ten_loai_khach="Diamond"
 	order by khach_hang.ho_ten;
 -- 5.	Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tong_tien (Với tổng tiền được tính theo công thức như sau: Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) cho tất cả các khách hàng đã từng đặt phòng. (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
-select kh.ma_khach_hang,kh.ho_ten,lk.ten_loai_khach,hop_dong.ma_hop_dong,dich_vu.ten_dich_vu,hop_dong.ngay_lam_hop_dong,hop_dong.ngay_ket_thuc, sum( dich_vu.chi_phi_thue+hop_dong_chi_tiet.so_luong*gia) as total
+select kh.ma_khach_hang,kh.ho_ten,lk.ten_loai_khach,hop_dong.ma_hop_dong,dich_vu.ten_dich_vu,hop_dong.ngay_lam_hop_dong,hop_dong.ngay_ket_thuc, sum( dich_vu.chi_phi_thue+hop_dong_chi_tiet.so_luong*gia ) as total
 from loai_khach as lk
 join khach_hang as kh on kh.ma_loai_khach=lk.ma_loai_khach
 join hop_dong on kh.ma_khach_hang=hop_dong.ma_khach_hang
 join dich_vu on hop_dong.ma_dich_vu=dich_vu.ma_dich_vu
-join kieu_thue on dich_vu.ma_kieu_thue=kieu_thue.ma_kieu_thue
-join loai_dich_vu on dich_vu.ma_loai_dich_vu=loai_dich_vu.ma_loai_dich_vu
-join hop_dong_chi_tiet on hop_dong.ma_hop_dong=hop_dong_chi_tiet.ma_hop_dong
-join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem=dich_vu_di_kem.ma_dich_vu_di_kem
-group by hop_dong.ma_hop_dong
+left join hop_dong_chi_tiet on hop_dong.ma_hop_dong=hop_dong_chi_tiet.ma_hop_dong
+left join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem=dich_vu_di_kem.ma_dich_vu_di_kem
+group by hop_dong.ma_hop_dong;
