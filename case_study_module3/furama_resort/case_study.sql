@@ -1,15 +1,19 @@
 create database case_study;
 use case_study;
+
 CREATE TABLE vi_tri (
     ma_vi_tri INT AUTO_INCREMENT PRIMARY KEY,
     ten_vi_tri VARCHAR(45)
 ); 
+
 insert into vi_tri(ten_vi_tri)
  value("giám đốc"),("nhân viên");
+ 
 create table trinh_do(
 ma_trinh_do int auto_increment primary key,
 ten_trinh_do varchar(45)
 );
+
 insert into trinh_do(ten_trinh_do)
  value("Trung cấp "),("Cao Đẳng"),("Đại Học"),("Sau Đại Học");
 
@@ -17,8 +21,10 @@ create table bo_phan(
 ma_bo_phan int auto_increment primary key,
 ten_bo_phan varchar(45)
 );
+
 insert into bo_phan(ten_bo_phan)
  value("Sale Marketing"),("Hành Chính"),("Phục Vụ"),("Quản Lý");
+ 
 create table nhan_vien(
 ma_nhan_vien int auto_increment primary key,
 ho_ten varchar(45)not null,
@@ -35,6 +41,7 @@ foreign key(ma_vi_tri) references vi_tri(ma_vi_tri),
 foreign key(ma_trinh_do) references trinh_do(ma_trinh_do),
 foreign key(ma_bo_phan) references bo_phan(ma_bo_phan)
 );
+
 insert into nhan_vien(ho_ten,ngay_sinh,so_cmnd,luong,so_dien_thoai,email,dia_chi,ma_vi_tri,ma_trinh_do,ma_bo_phan)
  value("Nguyễn Văn An",'1970-11-07',"456231786",10000000,"0901234121","nguyenA@gmail.com","295 Nguyễn Tất Thành, Đà Nẵng",1,3,1),
  ("Lê Văn Bình",'1997-04-09',"654231234",7000000,"0934212314","lebinh@gmail.com","22 Yên Bái, Đà Nẵng",1,2,2),
@@ -47,17 +54,18 @@ insert into nhan_vien(ho_ten,ngay_sinh,so_cmnd,luong,so_dien_thoai,email,dia_chi
  ("Nguyễn Khúc An Nghi",'1982-09-03',"256781231",6000000,"0245144444","nguyennghi@gmail.com","213 Hàm Nghi, Đà Nẵng",2,4,4),
  ("Nguyễn Công Đạo",'1994-01-08',"755434343",8000000,"0988767111","nguyencongdao@gmail.com","6 Hoà Khánh, Đồng Nai",2,3,2);
  
-
 create table loai_khach(
 ma_loai_khach int auto_increment primary key,
 ten_loai_khach varchar(45)
 );
+
 insert into loai_khach(ten_loai_khach)
 value("Diamond"),
 ("Platinum"),
 ("Gold"),
 ("Silver"),
 ("Member");
+
 create table khach_hang(
 ma_khach_hang int auto_increment primary key,
 ho_ten varchar(45) not null,
@@ -70,6 +78,7 @@ dia_chi varchar(45),
 ma_loai_khach int,
 foreign key(ma_loai_khach) references loai_khach(ma_loai_khach)
 );
+
 insert into khach_hang(ho_ten, ngay_sinh, gioi_tinh, so_cmnd, so_dien_thoai, email, dia_chi, ma_loai_khach)
 value("Nguyễn Thị Hào",'1970-11-07',0,"643431213","0945423362","thihao07@gmail.com","23 Nguyễn Hoàng, Đà Nẵng", 5),	
 ("Phạm Xuân Diệu",'1992-08-08',1,"865342123","0954333333","xuandieu92@gmail.com","K77/22 Thái Phiên, Quảng Trị", 3),
@@ -81,9 +90,6 @@ value("Nguyễn Thị Hào",'1970-11-07',0,"643431213","0945423362","thihao07@gm
 ("Nguyễn Thị Hào",'1999-04-08',0,"965656433","0763212345","haohao99@gmail.com","255 Nguyễn Văn Linh, Kon Tum", 3),
 ("Trần Đại Danh",'1994-07-01',1,"432341235","0643343433","danhhai99@gmail.com","24 Lý Thường Kiệt, Quảng Ngãi", 1),
 ("Nguyễn Tâm Đắc",'1989-07-01',1,"344343432","0987654321","dactam@gmail.com","22 Ngô Quyền, Đà Nẵng", 2);
-
-
-
 
 create table kieu_thue(
 ma_kieu_thue int auto_increment primary key,
@@ -248,11 +254,11 @@ select ho_ten
 from khach_hang;
 
 -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
-	select month(hop_dong.ngay_lam_hop_dong), count(ma_khach_hang)
-	from hop_dong
-    where year (hop_dong.ngay_lam_hop_dong)=2021
-	group by month(hop_dong.ngay_lam_hop_dong)
-    order by month(hop_dong.ngay_lam_hop_dong);
+select month(hop_dong.ngay_lam_hop_dong), count(ma_khach_hang)
+from hop_dong
+where year (hop_dong.ngay_lam_hop_dong)=2021
+group by month(hop_dong.ngay_lam_hop_dong)
+order by month(hop_dong.ngay_lam_hop_dong);
 -- 10.	Hiển thị thông tin tương ứng với từng hợp đồng thì đã sử dụng bao nhiêu dịch vụ đi kèm. Kết quả hiển thị bao gồm ma_hop_dong, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem).
 
 select hd.ma_hop_dong,hd.ngay_lam_hop_dong,hd.ngay_ket_thuc,hd.tien_dat_coc,ifnull(sum(hop_dong_chi_tiet.so_luong),0)as so_luong_dich_vu_di_kem
