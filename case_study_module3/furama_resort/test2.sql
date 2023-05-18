@@ -145,4 +145,8 @@ from student;
  order by student.`point` desc
  limit 1;
  
- 
+--  1. Đánh index cho cột name
+
+-- 2. Xoá index cho cột name
+-- 3. Tạo view chứa thông tin id, name của student
+--  
