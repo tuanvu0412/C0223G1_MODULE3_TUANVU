@@ -301,8 +301,15 @@ join hop_dong on khach_hang.ma_khach_hang= hop_dong.ma_khach_hang
 join hop_dong_chi_tiet on hop_dong.ma_hop_dong=hop_dong_chi_tiet.ma_hop_dong
 join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem= dich_vu_di_kem.ma_dich_vu_di_kem
 group by dich_vu_di_kem.ma_dich_vu_di_kem
-order by sum(hop_dong_chi_tiet.so_luong)  desc
-limit 2;
+having sum(hop_dong_chi_tiet.so_luong) = (
+select sum(hop_dong_chi_tiet.so_luong)
+from dich_vu_di_kem
+join hop_dong_chi_tiet on dich_vu_di_kem.ma_dich_vu_di_kem= hop_dong_chi_tiet.ma_dich_vu_di_kem
+group by dich_vu_di_kem.ma_dich_vu_di_kem
+order by sum(hop_dong_chi_tiet.so_luong) desc
+limit 1
+);
+
 -- 14.	Hiển thị thông tin tất cả các Dịch vụ đi kèm chỉ mới được sử dụng một lần duy nhất. Thông tin hiển thị bao gồm ma_hop_dong, ten_loai_dich_vu, ten_dich_vu_di_kem, so_lan_su_dung (được tính dựa trên việc count các ma_dich_vu_di_kem).
 select hd.ma_hop_dong,loai_dich_vu.ten_loai_dich_vu,dich_vu_di_kem.ten_dich_vu_di_kem, count(dich_vu_di_kem.ma_dich_vu_di_kem)
 from hop_dong hd
@@ -329,3 +336,71 @@ group by hd.ma_hop_dong, hop_dong_chi_tiet.ma_hop_dong_chi_tiet;
     where year(hd.ngay_lam_hop_dong)between 2020 and 2021
     group by nv.ma_nhan_vien
     having count(nv.ma_nhan_vien)<=3;
+    
+   --  16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
+set sql_safe_updates = 0;
+delete
+from nhan_vien
+where nhan_vien.ma_nhan_vien not in(select*from
+(select nhan_vien.ma_nhan_vien
+from nhan_vien
+join hop_dong on hop_dong.ma_nhan_vien= nhan_vien.ma_nhan_vien
+where year(hop_dong.ngay_lam_hop_dong) between 2019 and 2021
+) as t
+);
+set sql_safe_updates = 1;
+-- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond,
+-- chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
+set sql_safe_updates=0;
+update khach_hang
+set ma_loai_khach=1
+where khach_hang.ma_loai_khach = 2 and khach_hang.ma_khach_hang in (select * from
+(select khach_hang.ma_khach_hang
+from khach_hang
+join loai_khach on loai_khach.ma_loai_khach= khach_hang.ma_loai_khach
+join hop_dong on hop_dong.ma_khach_hang=khach_hang.ma_khach_hang
+join dich_vu on hop_dong.ma_dich_vu= dich_vu.ma_dich_vu
+join hop_dong_chi_tiet on hop_dong.ma_hop_dong=hop_dong_chi_tiet.ma_hop_dong
+join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem=dich_vu_di_kem.ma_dich_vu_di_kem
+where year(hop_dong.ngay_lam_hop_dong)=2021
+group by khach_hang.ma_khach_hang
+having sum( dich_vu.chi_phi_thue+ifnull(hop_dong_chi_tiet.so_luong*gia,0))> 10000000) as t
+);
+set sql_safe_updates= 1;
+-- 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).
+alter table khach_hang
+add status bit default 1;
+set sql_safe_updates = 0;
+update khach_hang
+set status = 0
+where khach_hang.ma_khach_hang in (select*from
+(select khach_hang.ma_khach_hang
+from khach_hang
+join hop_dong on hop_dong.ma_khach_hang=khach_hang.ma_khach_hang
+where year(hop_dong.ngay_lam_hop_dong)<2021) as t
+);
+set sql_safe_updates=1;
+-- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+set sql_safe_updates=0;
+update dich_vu_di_kem
+set dich_vu_di_kem.gia=gia*2
+where dich_vu_di_kem.ma_dich_vu_di_kem in(select * from(
+select dich_vu_di_kem.ma_dich_vu_di_kem
+from dich_vu
+join hop_dong on hop_dong.ma_dich_vu= dich_vu.ma_dich_vu
+join hop_dong_chi_tiet on hop_dong.ma_hop_dong=hop_dong_chi_tiet.ma_hop_dong
+join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem=dich_vu_di_kem.ma_dich_vu_di_kem
+where year(hop_dong.ngay_lam_hop_dong) =2020
+group by dich_vu_di_kem.ma_dich_vu_di_kem 
+having sum(hop_dong_chi_tiet.so_luong) > 10) as t
+);
+set sql_safe_updates = 1;
+-- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống,
+-- thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+select nv.ma_nhan_vien,nv.ho_ten,nv.email,nv.so_dien_thoai, nv.ngay_sinh, nv.dia_chi
+from nhan_vien nv
+union 
+select kh.ma_khach_hang,kh.ho_ten, kh.email,kh.so_dien_thoai, kh.ngay_sinh, kh.dia_chi
+from khach_hang kh;
+-- 21.	Tạo khung nhìn có tên là v_nhan_vien để lấy được thông tin của tất cả các nhân viên có địa chỉ là “Hải Châu” và
+-- đã từng lập hợp đồng cho một hoặc nhiều khách hàng bất kì với ngày lập hợp đồng là “12/12/2019”.
