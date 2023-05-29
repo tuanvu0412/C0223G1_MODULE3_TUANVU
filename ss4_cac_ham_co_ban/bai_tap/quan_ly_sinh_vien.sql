@@ -60,7 +60,7 @@ CREATE TABLE mark
 INSERT INTO mark (sub_id, student_id, mark, exam_times)
 VALUES (1, 1, 8, 1),
        (1, 2, 10, 2),
-       (2, 1, 12, 1);
+       (2, 1, 13, 1);
        
 -- Hiển thị tất cả các thông tin môn học (bảng subject) có credit lớn nhất.
 select *

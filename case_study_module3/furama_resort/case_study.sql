@@ -261,7 +261,8 @@ group by month(hop_dong.ngay_lam_hop_dong)
 order by month(hop_dong.ngay_lam_hop_dong);
 -- 10.	Hiển thị thông tin tương ứng với từng hợp đồng thì đã sử dụng bao nhiêu dịch vụ đi kèm. Kết quả hiển thị bao gồm ma_hop_dong, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem).
 
-select hd.ma_hop_dong,hd.ngay_lam_hop_dong,hd.ngay_ket_thuc,hd.tien_dat_coc,ifnull(sum(hop_dong_chi_tiet.so_luong),0)as so_luong_dich_vu_di_kem
+select hd.ma_hop_dong,hd.ngay_lam_hop_dong,hd.ngay_ket_thuc,hd.tien_dat_coc,ifnull(sum(hop_dong_chi_tiet.so_luong),0)as
+so_luong_dich_vu_di_kem
 from hop_dong hd
 left join hop_dong_chi_tiet on hd.ma_hop_dong=hop_dong_chi_tiet.ma_hop_dong
 group by hd.ma_hop_dong
@@ -338,17 +339,17 @@ group by hd.ma_hop_dong, hop_dong_chi_tiet.ma_hop_dong_chi_tiet;
     having count(nv.ma_nhan_vien)<=3;
     
    --  16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
-set sql_safe_updates = 0;
-delete
-from nhan_vien
-where nhan_vien.ma_nhan_vien not in(select*from
-(select nhan_vien.ma_nhan_vien
-from nhan_vien
-join hop_dong on hop_dong.ma_nhan_vien= nhan_vien.ma_nhan_vien
-where year(hop_dong.ngay_lam_hop_dong) between 2019 and 2021
-) as t
-);
-set sql_safe_updates = 1;
+-- set sql_safe_updates = 0;
+-- delete
+-- from nhan_vien
+-- where nhan_vien.ma_nhan_vien not in(select*from
+-- (select nhan_vien.ma_nhan_vien
+-- from nhan_vien
+-- join hop_dong on hop_dong.ma_nhan_vien= nhan_vien.ma_nhan_vien
+-- where year(hop_dong.ngay_lam_hop_dong) between 2019 and 2021
+-- ) as t
+-- );
+-- set sql_safe_updates = 1;
 -- 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond,
 -- chỉ cập nhật những khách hàng đã từng đặt phòng với Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ.
 set sql_safe_updates=0;
@@ -404,3 +405,19 @@ select kh.ma_khach_hang,kh.ho_ten, kh.email,kh.so_dien_thoai, kh.ngay_sinh, kh.d
 from khach_hang kh;
 -- 21.	Tạo khung nhìn có tên là v_nhan_vien để lấy được thông tin của tất cả các nhân viên có địa chỉ là “Hải Châu” và
 -- đã từng lập hợp đồng cho một hoặc nhiều khách hàng bất kì với ngày lập hợp đồng là “12/12/2019”.
+create view view_nhan_vien as
+select nhan_vien.ma_nhan_vien, nhan_vien.dia_chi
+from nhan_vien 
+where nhan_vien.ma_nhan_vien in(
+select nhan_vien.ma_nhan_vien
+from nhan_vien
+left join hop_dong on nhan_vien.ma_nhan_vien=hop_dong.ma_nhan_vien
+where nhan_vien.dia_chi="Đà Nẵng" or hop_dong.ngay_lam_hop_dong="2021-04-25"
+group by nhan_vien.ma_nhan_vien
+);
+-- 22.	Thông qua khung nhìn v_nhan_vien thực hiện cập nhật địa chỉ thành “Liên Chiểu” 
+-- đối với tất cả các nhân viên được nhìn thấy bởi khung nhìn này.
+set sql_safe_updates = 0;
+update view_nhan_vien
+set nhan_vien.dia_chi="Liên Chiểu"
+where nhan_vien.ma_nhan_vien;
