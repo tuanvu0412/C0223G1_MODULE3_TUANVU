@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CaculatorServlet", value = "/CaculatorServlet")
+@WebServlet(name = "CalculatorServlet", value = "/calculator-servlet")
 
 public class CaculatorServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -18,7 +18,7 @@ public class CaculatorServlet extends HttpServlet {
         double result2= num2-result;
         request.setAttribute("vu", result);
         request.setAttribute("vu2",result2);
-        RequestDispatcher r = request.getRequestDispatcher("result.jsp");
-        r.forward(request, response);
+        RequestDispatcher requestDispatcher= request.getRequestDispatcher("result.jsp");
+        requestDispatcher.forward(request, response);
     }
 }

@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="sum">
-  <form method="post" action="/CaculatorServlet">
+  <form method="post" action="/calculator-servlet">
     <label for="num2">
       Giá niêm yết của sản phẩm :
     </label>
