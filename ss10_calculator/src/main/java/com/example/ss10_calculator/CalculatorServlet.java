@@ -30,6 +30,8 @@ public class CalculatorServlet extends HttpServlet {
             case "/":
                 result = number1 / number2;
                 break;
+            default:
+                break;
         }
         req.setAttribute("result", result);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/result.jsp");
