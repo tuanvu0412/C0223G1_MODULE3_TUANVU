@@ -13,8 +13,8 @@ public class CalculatorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        double number1 = Double.parseDouble(req.getParameter("num1"));
-        double number2 = Double.parseDouble(req.getParameter("num2"));
+        double number1 = Double.parseDouble(req.getParameter("number1"));
+        double number2 = Double.parseDouble(req.getParameter("number2"));
         String option = req.getParameter("option");
         double result = 0;
         switch (option) {
