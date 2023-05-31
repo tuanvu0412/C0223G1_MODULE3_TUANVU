@@ -24,19 +24,19 @@
             <th>Price</th>
             <th>Date</th>
         </tr>
-        <c:forEach items="${list}" var="s" varStatus="loop">
+        <c:forEach items="${list}" var="product" varStatus="loop">
             <tr>
                 <td>
                     <c:out value="${loop.count}"/>
                 </td>
                 <td>
-                    <c:out value="${s.name}"/>
+                    <c:out value="${product.name}"/>
                 </td>
                 <td>
-                    <c:out value="${s.price}"/>
+                    <c:out value="${product.price}"/>
                 </td>
                 <td>
-                    <c:out value="${s.date}"/>
+                    <c:out value="${product.date}"/>
                 </td>
                 <td>
                     <button><a href="/product-servlet?action=edit&id=${s.id}"/>edit</button>
