@@ -39,10 +39,10 @@
                     <c:out value="${product.date}"/>
                 </td>
                 <td>
-                    <button><a href="/product-servlet?action=edit&id=${s.id}"/>edit</button>
+                    <button><a href="/product-servlet?action=edit&id=${product.id}"/>edit</button>
                 </td>
                 <td>
-                    <button><a href="/product-servlet?action=delete&id=${s.id}"/>delete</button>
+                    <button><a href="/product-servlet?action=delete&id=${product.id}"/>delete</button>
                 </td>
             </tr>
         </c:forEach>
