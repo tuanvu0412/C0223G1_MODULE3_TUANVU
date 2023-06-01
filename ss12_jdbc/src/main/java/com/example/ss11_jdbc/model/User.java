@@ -5,9 +5,11 @@ public class User {
     protected String user_name;
     protected String email;
     protected String country;
-    public User() {}
 
-    public User(String name, String email, String country) {
+    public User() {
+    }
+
+    public User(String user_name, String email, String country) {
         super();
         this.user_name = user_name;
         this.email = email;

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserService implements IUserService {
-    private IUserDAO userDAO=new UserDAO();
+    private IUserDAO userDAO = new UserDAO();
 
     @Override
     public List<User> selectAllUsers() {
@@ -28,5 +28,10 @@ public class UserService implements IUserService {
     @Override
     public void deleteUser(int id) {
         userDAO.deleteUser(id);
+    }
+
+    @Override
+    public void editUser(User user) {
+        userDAO.editUser(user);
     }
 }

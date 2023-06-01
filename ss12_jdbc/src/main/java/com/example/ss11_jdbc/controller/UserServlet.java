@@ -14,9 +14,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name="UserServlet",value = "/user-servlet")
+@WebServlet(name = "UserServlet", value = "/user-servlet")
 public class UserServlet extends HttpServlet {
-    private IUserService userDAO= new UserService();
+    private IUserService userDAO = new UserService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,7 +29,9 @@ public class UserServlet extends HttpServlet {
                 case "create":
                     creatNewUser(req, resp);
                     break;
-
+                case "edit":
+                    editUsers(req, resp);
+                    break;
                 default:
                     listUser(req, resp);
                     break;
@@ -39,15 +41,13 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private  void deleteUser(HttpServletRequest req, HttpServletResponse resp) {
-       int id=Integer.parseInt(req.getParameter("id"));
-       userDAO.deleteUser(id);
-        try {
-            resp.sendRedirect("/user-servlet");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    private  void editUsers(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = Integer.parseInt(req.getParameter("id"));
+        User user= userDAO.selectUser(id);
+        req.setAttribute("user",user);
+        resp.sendRedirect("/edit.jsp");
     }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -59,17 +59,31 @@ public class UserServlet extends HttpServlet {
             switch (action) {
                 case "showFormCreate":
                     showFormCreate(request, response);
+                    break;
+                case "edit":
+                    editUsers(request, response);
                 case "delete":
                     deleteUser(request, response);
                     break;
                 default:
                     listUser(request, response);
                     break;
-           }
+            }
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
     }
+
+//    private static void showFormEdit(HttpServletRequest request, HttpServletResponse response) {
+//       RequestDispatcher requestDispatcher=request.getRequestDispatcher("edit.jsp");
+//        try {
+//            requestDispatcher.forward(request,response);
+//        } catch (ServletException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     private static void showFormCreate(HttpServletRequest request, HttpServletResponse response) {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
@@ -82,26 +96,39 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private  void creatNewUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-       String name=request.getParameter("name");
-       String gmail=request.getParameter("gmail");
-       String country=request.getParameter("country");
-       User user= new User(name,gmail,country);
-       userDAO.insertUser(user);
+    private void creatNewUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+        String name = request.getParameter("name");
+        String gmail = request.getParameter("email");
+        System.out.println("123"+name);
+        System.out.println("123"+gmail);
+        System.out.println("test: "+request);
+        String country = request.getParameter("country");
+        User user = new User(name, gmail, country);
+        System.out.println(user);
+        userDAO.insertUser(user);
         try {
             response.sendRedirect("/user-servlet");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         List<User> listUser = userDAO.selectAllUsers();
         request.setAttribute("listUser", listUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/list.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/users/list.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void deleteUser(HttpServletRequest req, HttpServletResponse resp) {
+        int id = Integer.parseInt(req.getParameter("id"));
+        userDAO.deleteUser(id);
+        try {
+            resp.sendRedirect("/user-servlet");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

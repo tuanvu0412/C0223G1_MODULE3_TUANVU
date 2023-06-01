@@ -11,6 +11,8 @@
 <html>
 <head>
     <title>User Management Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="${contextPath}/resource/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <center>
@@ -19,10 +21,9 @@
         <a href="/user-servlet?action=showFormCreate">Add New User</a>
     </h2>
 </center>
-<form method="get" ></form>
+<form method="get"></form>
 <div align="center">
     <table border="1" cellpadding="5">
-        <caption><h2>List of Users</h2></caption>
         <tr>
             <th>ID</th>
             <th>Name</th>

@@ -19,10 +19,10 @@ public class UserDAO implements IUserDAO {
 
 
     @Override
-    public void insertUser(User user){
+    public void insertUser(User user) {
         Connection connection = BaseRepository.getConnection();
         try (
-             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getCountry());
@@ -30,10 +30,10 @@ public class UserDAO implements IUserDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try{
+        } finally {
+            try {
                 connection.close();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -42,9 +42,9 @@ public class UserDAO implements IUserDAO {
     @Override
     public User selectUser(int id) {
         User user = null;
-        Connection connection =BaseRepository.getConnection();
+        Connection connection = BaseRepository.getConnection();
         try {
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -52,7 +52,7 @@ public class UserDAO implements IUserDAO {
                 String user_name = rs.getString("name");
                 String email = rs.getString("email");
                 String country = rs.getString("country");
-                user = new User(id,user_name,email,country);
+                user = new User(id, user_name, email, country);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,7 +72,7 @@ public class UserDAO implements IUserDAO {
                 String user_name = resultSet.getString("user_name");
                 String email = resultSet.getString("email");
                 String country = resultSet.getString("country");
-                users.add(new User(id,user_name,email,country));
+                users.add(new User(id, user_name, email, country));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,18 +90,34 @@ public class UserDAO implements IUserDAO {
     public void deleteUser(int id) {
         Connection connection = BaseRepository.getConnection();
         try {
-                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USERS_SQL);
-            preparedStatement.setInt(1,id);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USERS_SQL);
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            try{
+        } finally {
+            try {
                 connection.close();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
+
+    @Override
+    public void editUser(User user) {
+        Connection connection = BaseRepository.getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL);
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setString(2,user.getName());
+            preparedStatement.setString(3,user.getEmail());
+            preparedStatement.setString(4,user.getCountry());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+
 

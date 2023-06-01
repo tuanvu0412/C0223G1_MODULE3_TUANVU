@@ -7,9 +7,12 @@ import java.util.List;
 
 public interface IUserService {
     public List<User> selectAllUsers();
+
     public void insertUser(User user) throws SQLException;
 
     public User selectUser(int id);
+
     void deleteUser(int id);
+    void editUser(User user);
 
 }
