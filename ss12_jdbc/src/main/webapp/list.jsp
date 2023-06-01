@@ -37,8 +37,8 @@
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.country}"/></td>
                 <td>
-                    <a href="/users?action=edit&id=${user.id}">Edit</a>
-                    <a href="/users?action=delete&id=${user.id}">Delete</a>
+                    <a href="/user-servlet?action=edit&id=${user.id}">Edit</a>
+                    <a href="/user-servlet?action=delete&id=${user.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

@@ -19,9 +19,9 @@ public class UserDAO implements IUserDAO {
 
 
     @Override
-    public void insertUser(User user) throws SQLException {
-        System.out.println(INSERT_USERS_SQL);
-        try (Connection connection = getConnection();
+    public void insertUser(User user){
+        Connection connection = BaseRepository.getConnection();
+        try (
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getEmail());
@@ -30,14 +30,21 @@ public class UserDAO implements IUserDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }finally {
+            try{
+                connection.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
         }
     }
 
     @Override
     public User selectUser(int id) {
         User user = null;
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+        Connection connection =BaseRepository.getConnection();
+        try {
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);
             preparedStatement.setInt(1, id);
             System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
@@ -77,6 +84,24 @@ public class UserDAO implements IUserDAO {
             }
         }
         return users;
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        Connection connection = BaseRepository.getConnection();
+        try {
+                PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USERS_SQL);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try{
+                connection.close();
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 }
 

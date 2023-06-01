@@ -10,5 +10,6 @@ public interface IUserService {
     public void insertUser(User user) throws SQLException;
 
     public User selectUser(int id);
+    void deleteUser(int id);
 
 }

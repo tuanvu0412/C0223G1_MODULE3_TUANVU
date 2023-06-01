@@ -24,4 +24,9 @@ public class UserService implements IUserService {
     public User selectUser(int id) {
         return userDAO.selectUser(id);
     }
+
+    @Override
+    public void deleteUser(int id) {
+        userDAO.deleteUser(id);
+    }
 }

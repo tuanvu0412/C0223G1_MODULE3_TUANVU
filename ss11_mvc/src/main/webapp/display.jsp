@@ -47,6 +47,11 @@
             </tr>
         </c:forEach>
     </table>
+   <form method="get" action="/product-servlet">
+       <input name="action" value="find" hidden>
+       <input name="name">
+       <input type="submit">
+   </form>
 </form>
 </body>
 </html>

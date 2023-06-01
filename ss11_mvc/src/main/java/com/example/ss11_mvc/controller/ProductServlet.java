@@ -5,6 +5,7 @@ import com.example.ss11_mvc.service.IProductService;
 import com.example.ss11_mvc.service.ProductService;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,11 +36,22 @@ public class ProductServlet extends HttpServlet {
                 editProduct(req, resp);
                 resp.sendRedirect("/product-servlet");
                 break;
+            case "find":
+                req.setAttribute("list", findByName(req,resp));
+                RequestDispatcher requestDispatcher1 = req.getRequestDispatcher("display.jsp");
+                requestDispatcher1.forward(req, resp);
+                break;
             default:
                 req.setAttribute("list", list);
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("display.jsp");
                 requestDispatcher.forward(req, resp);
         }
+    }
+
+    private List<Product> findByName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       String name=req.getParameter("name");
+        System.out.println("1");
+       return iProductService.findByName(name);
     }
 
     private void editProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

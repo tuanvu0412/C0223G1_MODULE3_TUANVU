@@ -10,4 +10,5 @@ public interface IUserDAO {
      User selectUser(int id);
      List<User> selectAllUsers();
 
+     void deleteUser(int id);
 }

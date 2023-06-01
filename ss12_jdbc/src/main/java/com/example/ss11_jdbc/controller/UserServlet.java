@@ -29,12 +29,23 @@ public class UserServlet extends HttpServlet {
                 case "create":
                     creatNewUser(req, resp);
                     break;
+
                 default:
                     listUser(req, resp);
                     break;
             }
         } catch (SQLException ex) {
             throw new ServletException(ex);
+        }
+    }
+
+    private  void deleteUser(HttpServletRequest req, HttpServletResponse resp) {
+       int id=Integer.parseInt(req.getParameter("id"));
+       userDAO.deleteUser(id);
+        try {
+            resp.sendRedirect("/user-servlet");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -48,6 +59,9 @@ public class UserServlet extends HttpServlet {
             switch (action) {
                 case "showFormCreate":
                     showFormCreate(request, response);
+                case "delete":
+                    deleteUser(request, response);
+                    break;
                 default:
                     listUser(request, response);
                     break;

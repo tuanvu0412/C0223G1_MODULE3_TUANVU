@@ -13,4 +13,6 @@ public interface IProductRepository {
 
     void editProduct(int id, Product product);
     Product findById(int id);
+
+    List<Product> findByName(String name);
 }

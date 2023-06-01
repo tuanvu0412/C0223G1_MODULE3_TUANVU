@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <title>Mercedes-Benz</title>
     <style>
-        .menu a {
+        .dropdown-menu:hover{
+
+        }
+        .dropdown-item{
+            color: white;
+        }
+        .menu a i{
             color: white;
             font-size: 18px;
         }
 
         marquee {
-            color:white;
+            color: white;
             font-family: VnCooper;
         }
 
         body {
-            font-family: VnArial;
+            font-family: Courier New;
         }
 
         .bg {
@@ -42,6 +48,7 @@
             background-image: linear-gradient(120deg, #eaee44, #33d0ff);
             opacity: .7;
         }
+
         #myBtn {
             display: block;
             position: fixed;
@@ -61,7 +68,8 @@
         #myBtn:hover {
             background-color: #555;
         }
-        .menu ul  a:hover{
+
+        .menu ul a:hover {
             color: white
         }
     </style>
@@ -77,12 +85,12 @@
         <marquee class="menu"> VH3 Automobile Store Online</marquee>
     </div>
     <div class="col-2">
-       <img src="mecccc.png" width="90%"; style="padding-left: 20px">
+        <img src="mecccc.png" width="150px" ; style="padding-left: 50px; padding-top: 30px">
     </div>
 
 </div>
 <nav class="navbar pt-0 navbar-expand-lg p-0">
-    <div class="container-fluid menu" style="background-color: black" >
+    <div class="container-fluid menu" style="background-color: black">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -90,11 +98,11 @@
         </button>
         <div class="collapse navbar-collapse  " id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <a class="nav-link dropdown-toggle menu"  id="navbarDropdownn" role="button"
+                <a class="nav-link dropdown-toggle menu" id="navbarDropdownn" role="button"
                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-car" >&nbsp</i>Các Dòng Xe
+                    <i class="fa-solid fa-car">&nbsp</i>Các Dòng Xe
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownn"style="">
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownn">
                     <li><a class="dropdown-item" href="#">C-Class</a></li>
                     <li><a class="dropdown-item" href="#">E-Class</a></li>
                     <li><a class="dropdown-item" href="#">S-Class</a></li>
@@ -130,24 +138,25 @@
                         <li><a class="dropdown-item" href="#">Bảo Hành</a></li>
                     </ul>
                 </li>
-<!--                <li class="nav-item dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"-->
-<!--                       data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--                        Thế giới Mercedes-Benz-->
-<!--                    </a>-->
-<!--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">-->
-<!--                        <li><a class="dropdown-item" href="#">Dịch vụ</a></li>-->
-<!--                        <li><a class="dropdown-item" href="#">Thế giới Mercedes-Benz</a></li>-->
-<!--                        <li>-->
-<!--                            <hr class="dropdown-divider">-->
-<!--                        </li>-->
-<!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
+                <!--                <li class="nav-item dropdown">-->
+                <!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"-->
+                <!--                       data-bs-toggle="dropdown" aria-expanded="false">-->
+                <!--                        Thế giới Mercedes-Benz-->
+                <!--                    </a>-->
+                <!--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">-->
+                <!--                        <li><a class="dropdown-item" href="#">Dịch vụ</a></li>-->
+                <!--                        <li><a class="dropdown-item" href="#">Thế giới Mercedes-Benz</a></li>-->
+                <!--                        <li>-->
+                <!--                            <hr class="dropdown-divider">-->
+                <!--                        </li>-->
+                <!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+                <!--                    </ul>-->
+                <!--                </li>-->
             </ul>
             <form class="d-flex">
                 <input class="form-control me-0" type="search" placeholder="Tìm kiếm loại xe" aria-label="Search">
-               &nbsp&nbsp <button class="btn btn-outline-light" type="submit">Search</button>
+                &nbsp&nbsp
+                <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
         </div>
     </div>
@@ -155,49 +164,142 @@
 </div>
 <div class="bg">
 </div>
-<div class="row" style="color: white; background-color: black; padding-top: 100px; padding-left: 35px; margin: 0px">
+<div class="row"
+     style="color: white; background-color: black; padding-top: 200px;width: 100%; height: 1000px; margin: 0px">
+    <h2 style="padding-top: 100px">Tìm Hiểu Thêm</h2>
     <div class="col-4">
-        <h4>Các Loại Xe Bán Chạy Nhất</h4>
         <br>
-        <div class="card" style="width: 90%; color: black">
-            <img src=" https://www.mercedes-benz.com.vn/content/vietnam/vi/passengercars/_jcr_content/root/responsivegrid/simple_teaser_115569/simple_teaser_item_1.component.damq6.3368440270245.png/homepage-simple-teaser-item-glc-x253-promo.png" c...lass="card-img-top" alt="...">
+        <div class="card" style="width: 100%; color: black">
+            <img src="https://mercedes-showroom.com/wp-content/uploads/2021/10/z4263548322392_83543043456b73ea6223be1ac09e9cba.jpg"
+                 c...lass="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">GLC của bạn đã sẵn sàng</h5>
                 <p class="card-text">Tận hưởng ưu đãi 100% lệ phí trước bạ từ Nhà Phân Phối chính hãng.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#" class="btn btn-primary">Chọn Xe Có Sẵn Cùng Ưu Đãi</a>
             </div>
         </div>
     </div>
     <div class="col-4">
-        <h4>Các Loại Xe Bán Chạy Nhất</h4>
         <br>
-        <div class="card" style="width: 90%; color: black">
-            <img src=" https://www.mercedes-benz.com.vn/content/vietnam/vi/passengercars/_jcr_content/root/responsivegrid/simple_teaser_115569/simple_teaser_item_1683621011.component.damq6.3368900894838.png/c-class-e-class-promo-homepage-simple-teaser-item-c-class.png" c...lass="card-img-top" alt="...">
+        <div class="card" style="width: 100%; color: black">
+            <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2022-mercedes-benz-c-class-106-1613767205.jpg"
+                 c...lass="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Ưu đãi tháng 5 - Thời điểm hoàn hảo để sở hữu C-Class</h5>
+                <h5 class="card-title">Ưu đãi tháng 6 - Thời điểm hoàn hảo để sở hữu C-Class</h5>
                 <p class="card-text">Nhận ngay quà tặng 50% lệ phí trước bạ khi mua C-Class, duy nhất trong tháng 5.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#" class="btn btn-primary">Mua Xe Có Sẵn Cùng Ưu Đãi</a>
             </div>
         </div>
     </div>
     <div class="col-4">
-        <h4>Các Loại Xe Bán Chạy Nhất</h4>
         <br>
-        <div class="card" style="width: 90%;color: black">
-            <img src=" https://www.mercedes-benz.com.vn/content/vietnam/vi/passengercars/_jcr_content/root/responsivegrid/simple_teaser_115569/simple_teaser_item_1928324910.component.damq6.3368900723761.png/c-class-e-class-promo-homepage-simple-teaser-item-e-class.png" c...lass="card-img-top" alt="...">
+        <div class="card" style="width: 100%;color: black">
+            <img src="https://www.mercedes-benz.com.vn/vi/passengercars/mercedes-benz-cars/test-drive-models/e-class/e-class-coupe/facts-and-lines/equipment-lines/_jcr_content/comparisonslider/par/comparisonslide_c015/exteriorImage.MQ6.12.20181015080404.jpeg"
+                 c...lass="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Sở hữu E-Class cùng ưu đãi tháng 5</h5>
+                <h5 class="card-title">Sở hữu E-Class cùng ưu đãi tháng 6</h5>
                 <p class="card-text">Duy nhất tháng 5 - Dẫn đầu xu thế năng động cùng ưu đãi 50% lệ phí trước bạ.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#" class="btn btn-primary">Chọn Xe Có Sẵn Cùng Ưu Đãi</a>
             </div>
         </div>
     </div>
 </div>
-<button onclick="topFunction()" id="myBtn" title="Quay Về Đầu Trang">lên trên</button>
+</div>
+<div class="row" style="padding-top: 100px">
+    <div>
+        <span>
+            <h2>các loại xe</h2>
+        </span>
+    </div>
+</div>
+<div class="row" style="background-color: white">
+    <div class="col-3">
+
+    </div>
+    <div class="col-3">
+        <div class="card" style="width: 18rem;">
+            <div id="carouselExample1" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card" style="width: 18rem;">
+            <div id="carouselExample2" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="card" style="width: 18rem;">
+            <div id="carouselExample3" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://assets.oneweb.mercedes-benz.com/iris/iris.jpg?COSY-EU-100-1713d0VXq0hdqtyO67PobzIr3eWsrrCsdRRzwQZv9IZbMw3SGtGyMtsd2vtcUfp8cXGEuiRJ0l34AOB2NQnbApj7bI5ux52QC31vTkzNBTnm7jA6IhKV5Kh%25vqCBlyLRznyYax7oxrH1KMun8wsOcoiZU7pM4FGTJTg906V6PDBGlSeWAhItsd5kdcUfSA1XGEvTSJ0lL6qOB2abRbApHYpI5usoJQC3UC1kzNGtNm7j0O3hKVB%25t%25vqA8TyLRiO6Yax4JOroYhfldsbbAp7oMIkb1ECQmIFUrkzNUU6m7jscWhKVzsM%25vq7UcyLRKOyYaxvODrH1peKn8wiA2oiZ45gM4zuA1YtEWpTuP6CPDAFIT9ZxeedNtjD%259j6hVNpLpIZIGwC7Ux0wPfejr9j&imgt=P27&bkgnd=9&pov=BE140&uni=cs&im=Crop,rect=(0,0,1450,750),gravity=Center;Resize,width=250" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<button onclick="topFunction()" id="myBtn" title="Quay Về Đầu Trang">BackToTop</button>
 <script src="../../bootstrap-5.1.3-dist/bootstrap-5.1.3-dist/js/bootstrap.bundle.js">
 </script>
 <script>
-    window.onscroll = function() {scrollFunction()};
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
     function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             document.getElementById("myBtn").style.display = "block";
@@ -205,6 +307,7 @@
             document.getElementById("myBtn").style.display = "none";
         }
     }
+
     function topFunction() {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
